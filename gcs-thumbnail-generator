@@ -16,7 +16,7 @@
      private $gcs_config = array(
         'credentials_file' => '',  // Path to service account JSON file
         'credentials_json' => '',  // JSON content as string (alternative to file)
-        'project_id' => '',        // Your GCS project ID
+        'project_id' => '',       // Your GCS project ID
         'bucket' => '', // Your bucket name
     );
     
