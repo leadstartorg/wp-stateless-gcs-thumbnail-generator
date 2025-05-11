@@ -1,25 +1,16 @@
-/**
- * GCS Thumbnail Generator
- * 
- * Plugin Name: GCS Thumbnail Generator
- * Description: Generate missing thumbnails for images stored in Google Cloud Storage
- * Version: 1.0.1
- * Author: Leadstart Media, Inc.
- * License: GPL v2 or later
- */
-
  class GCS_Thumbnail_Generator {
      
      /**
       * GCS Credentials Configuration
       */
+
      private $gcs_config = array(
         'credentials_file' => '',  // Path to service account JSON file
-        'credentials_json' => '',  // JSON content as string (alternative to file)
-        'project_id' => '',       // Your GCS project ID
+        'credentials_json' => '', // JSON content as string (alternative to file)
+        'project_id' => '',        // Your GCS project ID
         'bucket' => '', // Your bucket name
     );
-    
+   
         /**
          * Constructor
         */
@@ -877,7 +868,11 @@
                 $result['debug'][] = "Deleted thumbnails: " . implode(', ', $thumbnails_deleted);
                 
                 // Get the file directory for storage
-                $file_dir = dirname($metadata['file']);
+                //$file_dir = dirname($metadata['file']);
+
+                $original_path = str_replace('https://storage.googleapis.com/' . $this->gcs_config['bucket'] . '/', '', $full_url);
+                $file_dir = dirname($original_path);
+                $result['debug'][] = "Original directory path: " . $file_dir;
                 
                 // Track if we successfully generated any thumbnails with custom method
                 $generated_any_thumbnails = false;
@@ -1667,3 +1662,5 @@
     
     // Initialize
     $gcs_thumbnail_generator = new GCS_Thumbnail_Generator();
+
+   
